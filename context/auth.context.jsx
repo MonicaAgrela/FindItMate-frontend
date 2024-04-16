@@ -1,6 +1,6 @@
-import React, { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext } from "react";
 import axios from "axios";
-const API_URL = "http://localhost:5005";
+
 
 const AuthContext = createContext();
 

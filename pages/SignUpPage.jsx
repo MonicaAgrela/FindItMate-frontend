@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
- 
-const API_URL = "http://localhost:5005";
- 
+  
  
 function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
  
   const navigate = useNavigate();
@@ -17,6 +16,7 @@ function SignupPage(props) {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
+  const handleUserName = (e) => setUserName(e.target.value);
  
   
   const handleSignupSubmit = (e) => {
@@ -25,10 +25,11 @@ function SignupPage(props) {
     let newUser = {
         email:email,
         password:password,
-        name:name
+        name:name,
+        username:username
     }
 
-    axios.post('http://localhost:5005/auth/signup',newUser)
+    axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`,newUser)
     .then((createdUser)=>{
         navigate('/login')
         console.log(createdUser)
@@ -43,6 +44,24 @@ function SignupPage(props) {
   return (
     <div className="SignupPage">
       <h1>Sign Up</h1>
+
+      <label>Name:</label>
+        <input 
+          required
+          type="text"
+          name="name"
+          value={name}
+          onChange={handleName}
+        />
+
+<label>Username:</label>
+        <input 
+          required
+          type="text"
+          name="name"
+          value={username}
+          onChange={handleUserName}
+        />
  
       <form onSubmit={handleSignupSubmit}>
         <label>Email:</label>
@@ -62,16 +81,6 @@ function SignupPage(props) {
           name="password"
           value={password}
           onChange={handlePassword}
-        />
- 
-       
-        <label>Name:</label>
-        <input 
-          required
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleName}
         />
  
         <button type="submit">Sign Up</button>
