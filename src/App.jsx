@@ -1,13 +1,13 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import HomePage from "../pages/HomePage";
-import ItemsPage from "../pages/ItemsPage";
-import IsAnon from "../components/IsAnon";
-import IsPrivate from "../components/IsPrivate";
-import HowItWorks from "../pages/HowItWorks";
-import SignupPage from "../pages/SignUpPage";
-import LoginPage from "../pages/LoginPage";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import ItemsPage from "./pages/ItemsPage";
+import IsAnon from "./components/IsAnon";
+import IsPrivate from "./components/IsPrivate";
+import HowItWorks from "./pages/HowItWorks";
+import SignupPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
