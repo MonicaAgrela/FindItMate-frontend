@@ -8,6 +8,7 @@ import IsPrivate from "../components/IsPrivate";
 import HowItWorks from "../pages/HowItWorks";
 import SignupPage from "../pages/SignUpPage";
 import LoginPage from "../pages/LoginPage";
+import CategoryItemsPage from "../pages/CategoryItemsPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             </IsAnon>
           }
         />
+        <Route path="/items/categories/:category" element={<CategoryItemsPage />} />
         <Route
           exact
           path="/login"
