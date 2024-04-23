@@ -1,18 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-//import { GiMeat } from "react-icons/gi";
-//import { FaSpaghettiMonsterFlying } from "react-icons/fa6";
-//import { FaFish, FaPizzaSlice, FaCarrot } from "react-icons/fa";
 
 function CategoryItemsPage() {
   const [items, setItems] = useState([]);
-  const [type, setType] = useState("shoes");
 
   const { category } = useParams();
 
   useEffect(() => {
-    if (type) {
+    if (category) {
       axios
         .get(
           `${import.meta.env.VITE_API_URL}/api/items/category?type=${category}`
@@ -25,7 +21,7 @@ function CategoryItemsPage() {
           console.error(error);
         });
     }
-  }, [type]);
+  }, [category]);
 
   return (
     <div
@@ -82,19 +78,10 @@ function CategoryItemsPage() {
               type: "others",
             },
           ].map((category) => (
-            <button
-              key={category.type}
-              onClick={() => setType(category.type)}
-              className={`flex flex-col items-center focus:outline-none text-xl font-semibold ${
-                type === category.type
-                  ? `text-${category.type}`
-                  : "text-gray-500"
-              }`}
-              style={{ backgroundColor: category.color }}
-            >
+            <Link key={category.type} to={`/items/categories/${category.type}`}>
               {category.icon}
               <span>{category.type}</span>
-            </button>
+            </Link>
           ))}
         </div>
       }
@@ -111,7 +98,7 @@ function CategoryItemsPage() {
                   alt={CategoryItemsPage.name}
                   className="mt-2 mb-4 rounded-md object-cover w-full h-48"
                 />
-                <p>{item.location}</p>
+
                 <Link
                   to={`/items/${item._id}`}
                   className="text-blue-500 hover:underline"

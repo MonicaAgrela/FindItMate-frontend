@@ -9,6 +9,9 @@ import HowItWorks from "../pages/HowItWorks";
 import SignupPage from "../pages/SignUpPage";
 import LoginPage from "../pages/LoginPage";
 import CategoryItemsPage from "../pages/CategoryItemsPage";
+import ItemsDetailPage from "../pages/ItemsDetailPage";
+import EditItemsPage from "../pages/EditItemsPage";
+import MessagePage from "../pages/MessagePage";
 
 function App() {
   return (
@@ -26,7 +29,10 @@ function App() {
             </IsPrivate>
           }
         />
+        <Route exact path="/items/:itemId" element={<ItemsDetailPage />} />
+        <Route exact path="/items/edit/:itemId" element={<EditItemsPage />} />
         <Route exact path="/how-it-works" element={<HowItWorks />} />
+        <Route exact path="/messages" element={<MessagePage />} />
         <Route
           exact
           path="/signup"
@@ -36,7 +42,10 @@ function App() {
             </IsAnon>
           }
         />
-        <Route path="/items/categories/:category" element={<CategoryItemsPage />} />
+        <Route
+          path="/items/categories/:category"
+          element={<CategoryItemsPage />}
+        />
         <Route
           exact
           path="/login"

@@ -38,6 +38,18 @@ function ItemsPage() {
 
   return (
     <div>
+      {" "}
+      <label>
+        Search Items{" "}
+        <input
+          id="search-bar"
+          type="text"
+          /*onChange={(e) => {
+              setQuery(e.target.value);
+            }}
+            value={query}*/
+        />
+      </label>
       {category.map((element) => {
         return (
           <Link to={`/items/categories/${element}`} key={element}>
@@ -52,20 +64,7 @@ function ItemsPage() {
           padding: "10px",
           fontSize: "20px",
         }}
-      >
-        {" "}
-        <label>
-          Search Items{" "}
-          <input
-            id="search-bar"
-            type="text"
-            /*onChange={(e) => {
-              setQuery(e.target.value);
-            }}
-            value={query}*/
-          />
-        </label>
-      </div>
+      ></div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {items && (
           <>

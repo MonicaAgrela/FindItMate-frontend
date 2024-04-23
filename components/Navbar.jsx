@@ -3,14 +3,12 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 import { AuthContext } from "../context/auth.context";
-import React, { useState } from "react";
-// import { FaTimes } from "react-icons/fa";
-// import { CiMenuFries } from "react-icons/ci";
+//import { useState } from "react";
 
 function Navbar() {
-  const [click, setClick] = useState(false);
+  //const [click, setClick] = useState(false);
 
-  const handleClick = () => setClick(!click);
+  //const handleClick = () => setClick(!click);
 
   const { user, isLoggedIn, logOutUser } = useContext(AuthContext);
   return (
