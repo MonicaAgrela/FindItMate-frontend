@@ -12,6 +12,7 @@ import CategoryItemsPage from "../pages/CategoryItemsPage";
 import ItemsDetailPage from "../pages/ItemsDetailPage";
 import EditItemsPage from "../pages/EditItemsPage";
 import MessagePage from "../pages/MessagePage";
+import AddItemsPage from "../pages/AddItemsPage";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
             </IsAnon>
           }
         />
+        <Route exact path="/new-item" element={<AddItemsPage />} />
       </Routes>
     </div>
   );
