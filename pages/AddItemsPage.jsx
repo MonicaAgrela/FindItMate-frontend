@@ -93,7 +93,7 @@ function AddItemsPage() {
           Image:
           <input
             name="image"
-            type="text"
+            type="file"
             onChange={(e) => setImage(e.target.value)}
             value={image}
             className="form-input mt-1 block w-full border border-gray-300 rounded-md"
