@@ -44,7 +44,7 @@ function AddItemsPage() {
       });
   };
 
-  /*const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
 
   const handleFileUpload = (e) => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -63,7 +63,7 @@ function AddItemsPage() {
         setImageUrl(response.data.fileUrl);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
-  };*/
+  };
 
   return (
     <div>
@@ -94,7 +94,7 @@ function AddItemsPage() {
           <input
             name="image"
             type="file"
-            onChange={(e) => setImage(e.target.value)}
+            onChange={(e) =>{handleFileUpload(e)} }
             value={image}
             className="form-input mt-1 block w-full border border-gray-300 rounded-md"
           />

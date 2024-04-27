@@ -58,6 +58,27 @@ function EditItemsPage(props) {
       .catch((err) => console.log(err));
   };
 
+  const [imageUrl, setImageUrl] = useState(null);
+
+  const handleFileUpload = (e) => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+    const uploadData = new FormData();
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadData.append("imageUrl", e.target.files[0]);
+
+    axios
+      .post(` ${import.meta.env.VITE_API_URL}/api/upload`, uploadData)
+      .then((response) => {
+        console.log("response is: ", response);
+        // response carries "fileUrl" which we can use to update the state
+        //setImageUrl(response.data.fileUrl);
+        console.log(response.data.fileUrl);
+        setImageUrl(response.data.fileUrl);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
+  };
+
   return (
     <div>
       <h3>Edit the Item</h3>
@@ -87,8 +108,7 @@ function EditItemsPage(props) {
           <input
             name="image"
             type="file"
-            onChange={(e) => setImage(e.target.value)}
-            value={image}
+            onChange={(e) => {handleFileUpload(e)}}
             className="form-input mt-1 block w-full border border-gray-300 rounded-md"
           />
         </label>
