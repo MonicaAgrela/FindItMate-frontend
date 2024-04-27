@@ -56,7 +56,7 @@ function ItemsDetailPage() {
       <Link to={`/items/edit/${itemId}`}>
         <button>Edit Item</button>
       </Link>
-      <Link to="/messages">
+      <Link to={`/items/messages/${itemId}`}>
         <button>Chat</button>
       </Link>
     </div>

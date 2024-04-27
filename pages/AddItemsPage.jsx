@@ -16,7 +16,7 @@ function AddItemsPage() {
 
     const requestBody = {
       type,
-      image,
+      imageUrl,
       description,
       place,
       location,
@@ -59,8 +59,8 @@ function AddItemsPage() {
         console.log("response is: ", response);
         // response carries "fileUrl" which we can use to update the state
         //setImageUrl(response.data.fileUrl);
-        console.log(response.data.fileUrl);
-        setImageUrl(response.data.fileUrl);
+        console.log(response.data.fileUrl[0].path);
+        setImageUrl(response.data.fileUrl[0].path);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
@@ -94,7 +94,9 @@ function AddItemsPage() {
           <input
             name="image"
             type="file"
-            onChange={(e) =>{handleFileUpload(e)} }
+            onChange={(e) => {
+              handleFileUpload(e);
+            }}
             value={image}
             className="form-input mt-1 block w-full border border-gray-300 rounded-md"
           />

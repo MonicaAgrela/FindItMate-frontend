@@ -12,6 +12,7 @@ import CategoryItemsPage from "../pages/CategoryItemsPage";
 import ItemsDetailPage from "../pages/ItemsDetailPage";
 import EditItemsPage from "../pages/EditItemsPage";
 import MessagePage from "../pages/MessagePage";
+import Message from "../components/Message";
 import AddItemsPage from "../pages/AddItemsPage";
 
 function App() {
@@ -33,7 +34,8 @@ function App() {
         <Route exact path="/items/:itemId" element={<ItemsDetailPage />} />
         <Route exact path="/items/edit/:itemId" element={<EditItemsPage />} />
         <Route exact path="/how-it-works" element={<HowItWorks />} />
-        <Route exact path="/messages" element={<MessagePage />} />
+        <Route exact path="/items/messages/:itemId" element={<MessagePage />} />
+        <Route exact path="/message" element={<Message />} />
         <Route
           exact
           path="/signup"
