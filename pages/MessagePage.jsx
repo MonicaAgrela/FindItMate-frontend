@@ -6,6 +6,26 @@ function MessagePage() {
   const messageRef = useRef();
   const [message, setMessage] = useState(null);
   const { itemId } = useParams();
+  const [messageValue, setMessageValue] = useState("");
+
+  const handleSubmit = (e) => {
+    e?.preventDefault();
+    const requestBody = {
+      itemId,
+      messageValue,
+    };
+
+    messageService
+      .createMessage(requestBody)
+      .then((res) => {
+        console.log(res);
+        getAllMessages();
+        setMessageValue("");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const getAllMessages = () => {
     messageService
@@ -20,30 +40,49 @@ function MessagePage() {
     getAllMessages();
   }, [itemId]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    clearInput();
-  };
-
-  const clearInput = () => {
-    messageRef.current.value = "";
-  };
+  // const clearInput = () => {
+  //   messageRef.current.value = "";
+  // };
   console.log(message);
   if (!message) {
-    return <p>Loading</p>;
+    return (
+      <>
+        <input
+          type="text"
+          placeholder="Message"
+          onChange={(e) => {
+            setMessageValue(e.target.value);
+          }}
+        ></input>
+        <button type="button" onClick={() => handleSubmit()}>
+          Send
+        </button>
+      </>
+    );
   }
 
   return (
     <div>
       <h1>MessagePage</h1>
-      {message.messages.map((oneMessage) => (
-        <div key={oneMessage._id}>
-          <p>{oneMessage.sender.name}</p>
-          <p>{oneMessage.message}</p>
-        </div>
-      ))}
-      <input type="text" placeholder="Message"></input>
-      <button onClick={() => handleSubmit()}>Send</button>
+      <form onSubmit={handleSubmit}>
+        {message.messages.map((oneMessage) => (
+          <div key={oneMessage._id}>
+            <p>{oneMessage.sender.name}</p>
+            <p>{oneMessage.message}</p>
+          </div>
+        ))}
+        <input
+          type="text"
+          placeholder="Message"
+          value={messageValue}
+          onChange={(e) => {
+            setMessageValue(e.target.value);
+          }}
+        ></input>
+        <button type="button" onClick={() => handleSubmit()}>
+          Send
+        </button>
+      </form>
     </div>
   );
 }
