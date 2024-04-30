@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import messageService from "../services/message.service";
 
 function MessagePage() {
-  const messageRef = useRef();
+  /*const messageRef = useRef();*/
   const [message, setMessage] = useState(null);
   const { itemId } = useParams();
   const [messageValue, setMessageValue] = useState("");

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import itemsService from "../services/items.service";
+import axios from "axios";
 
 function ItemsDetailPage() {
   const [item, setItem] = useState(null);
   const { itemId } = useParams();
+  const navigate = useNavigate();
   /*const [message, setMessage] = useState("")
 
   const requestBody = {message}
@@ -35,6 +37,15 @@ function ItemsDetailPage() {
     getItem();
   }, []);
 
+  const deleteItem = () => {
+    axios
+      .delete(`${import.meta.env.VITE_API_URL}/api/item/${itemId}`)
+      .then(() => {
+        navigate("/items");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       {item && (
@@ -59,6 +70,7 @@ function ItemsDetailPage() {
       <Link to={`/items/messages/${itemId}`}>
         <button>Chat</button>
       </Link>
+      <button onClick={deleteItem}>Delete Item</button>
     </div>
   );
 }

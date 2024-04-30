@@ -49,14 +49,6 @@ function EditItemsPage(props) {
       });
   };
 
-  const deleteItem = () => {
-    axios
-      .delete(`${import.meta.env.VITE_API_URL}/api/items/${itemId}`)
-      .then(() => {
-        navigate("/items");
-      })
-      .catch((err) => console.log(err));
-  };
 
   const [imageUrl, setImageUrl] = useState(null);
 
@@ -108,7 +100,9 @@ function EditItemsPage(props) {
           <input
             name="image"
             type="file"
-            onChange={(e) => {handleFileUpload(e)}}
+            onChange={(e) => {
+              handleFileUpload(e);
+            }}
             className="form-input mt-1 block w-full border border-gray-300 rounded-md"
           />
         </label>
@@ -179,7 +173,6 @@ function EditItemsPage(props) {
         <button type="submit">Update Item</button>
       </form>
 
-      <button onClick={deleteItem}>Delete Item</button>
     </div>
   );
 }
