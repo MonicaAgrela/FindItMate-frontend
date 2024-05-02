@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+//import { Link } from "react-router-dom";
 import axios from "axios";
+import itemsService from "../services/items.service";
 
-function EditItemsPage(props) {
+function AddItemsPage() {
   const [type, setType] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
@@ -11,30 +12,12 @@ function EditItemsPage(props) {
   const [date, setDate] = useState("");
   const [additionalInformation, setAdditionalInformation] = useState("");
 
-  const { itemId } = useParams();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/api/items/${itemId}`)
-      .then((response) => {
-        const oneItem = response.data;
-        setType(oneItem.type);
-        setImage(oneItem.image);
-        setDescription(oneItem.description);
-        setPlace(oneItem.place);
-        setLocation(oneItem.location);
-        setDate(oneItem.date);
-        setAdditionalInformation(oneItem.additionalInformation);
-      })
-      .catch((error) => console.log(error));
-  }, [itemId]);
-
-  const handleFormSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
     const requestBody = {
       type,
-      image,
+      imageUrl,
       description,
       place,
       location,
@@ -42,10 +25,23 @@ function EditItemsPage(props) {
       additionalInformation,
     };
 
-    axios
-      .put(`${import.meta.env.VITE_API_URL}/api/items/${itemId}`, requestBody)
-      .then(() => {
-        navigate(`/items/${itemId}`);
+    itemsService
+      .createItem(requestBody)
+      .then((response) => {
+        console.log(response);
+        // Reset the state
+        setType("");
+        setImage("");
+        setDescription("");
+        setPlace("");
+        setLocation("");
+        setDate("");
+        setAdditionalInformation("");
+
+        //props.refreshItems();
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -64,8 +60,8 @@ function EditItemsPage(props) {
         console.log("response is: ", response);
         // response carries "fileUrl" which we can use to update the state
         //setImageUrl(response.data.fileUrl);
-        console.log(response.data.fileUrl);
-        setImageUrl(response.data.fileUrl);
+        console.log(response.data.fileUrl[0].path);
+        setImageUrl(response.data.fileUrl[0].path);
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
@@ -73,9 +69,9 @@ function EditItemsPage(props) {
   return (
     <div className="flex justify-center items-center h-screen bg-white">
       <div className="p-8 bg-white rounded-lg shadow-md sm:w-3/4 md:w-3/4 lg:w-2/3 xl:w-1/2">
-        <h3 className="text-2xl font-bold mb-4">Edit the Item</h3>
+        <h1 className="text-2xl font-bold mb-4">AddItemsPage</h1>
 
-        <form onSubmit={handleFormSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <label className="block">
             <span className="text-gray-700">Type:</span>
             <select
@@ -108,6 +104,7 @@ function EditItemsPage(props) {
               onChange={(e) => {
                 handleFileUpload(e);
               }}
+              value={image}
               className="form-input mt-1 block w-full border border-gray-300 rounded-md"
             />
           </label>
@@ -178,10 +175,9 @@ function EditItemsPage(props) {
             <span className="text-gray-700">Additional Information:</span>
             <textarea
               name="additionalInformation"
-              type="text"
               onChange={(e) => setAdditionalInformation(e.target.value)}
               value={additionalInformation}
-              className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+              className="form-textarea mt-1 block w-full border border-gray-300 rounded-md"
             />
           </label>
 
@@ -189,7 +185,7 @@ function EditItemsPage(props) {
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
           >
-            Update Item
+            Submit
           </button>
         </form>
       </div>
@@ -197,4 +193,4 @@ function EditItemsPage(props) {
   );
 }
 
-export default EditItemsPage;
+export default AddItemsPage;

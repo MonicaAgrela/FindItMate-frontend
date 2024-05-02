@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "/src/index.css"
 
 function SignupPage(props) {
   const [email, setEmail] = useState("");
@@ -40,101 +39,78 @@ function SignupPage(props) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="p-8 bg-white bg-opacity-90 shadow-md sm:rounded-lg mx-auto max-w-md w-full space-y-8">
-        <div>
-          <h2 className="text-3xl font-extrabold text-center text-gray-800">
-            Sign up for an account
-          </h2>
-        </div>
-        <form onSubmit={handleSignupSubmit} className="space-y-6">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md">
+        <h1 className="text-3xl font-semibold text-center mb-6">Sign Up</h1>
+
+        <form onSubmit={handleSignupSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="sr-only">
-              Name
-            </label>
+            <label className="block mb-1">Name:</label>
             <input
-              id="name"
-              name="name"
-              type="text"
               required
-              className="input-field"
-              placeholder="Name"
+              type="text"
+              name="name"
               value={name}
               onChange={handleName}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
             />
           </div>
+
           <div>
-            <label htmlFor="username" className="sr-only">
-              Username
-            </label>
+            <label className="block mb-1">Username:</label>
             <input
-              id="username"
-              name="username"
-              type="text"
               required
-              className="input-field"
-              placeholder="Username"
+              type="text"
+              name="username"
               value={username}
               onChange={handleUserName}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
             />
           </div>
+
           <div>
-            <label htmlFor="email-address" className="sr-only">
-              Email address
-            </label>
+            <label className="block mb-1">Email:</label>
             <input
-              id="email-address"
-              name="email"
-              type="email"
-              autoComplete="email"
               required
-              className="input-field"
-              placeholder="Email address"
+              type="email"
+              name="email"
               value={email}
               onChange={handleEmail}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
             />
           </div>
+
           <div>
-            <label htmlFor="password" className="sr-only">
-              Password
-            </label>
+            <label className="block mb-1">Password:</label>
             <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
               required
-              className="input-field"
-              placeholder="Password"
+              minLength={6}
+              type="password"
+              name="password"
               value={password}
               onChange={handlePassword}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
             />
           </div>
-          <div>
-            <button
-              type="submit"
-              className="btn-primary w-full py-3 px-4 bg-gradient-to-r from-pink-500 to-purple-500 rounded-md text-white font-semibold transition duration-300 ease-in-out transform hover:scale-105"
-            >
-              Sign up
-            </button>
-          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+          >
+            Sign Up
+          </button>
         </form>
-        <div className="text-center">
-          <p className="text-sm text-gray-700">
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              Log in
-            </Link>
-          </p>
-        </div>
+
         {errorMessage && (
-          <p className="mt-2 text-center text-sm text-red-600">
-            {errorMessage}
-          </p>
+          <p className="text-red-500 text-center mt-4">{errorMessage}</p>
         )}
+
+        <p className="mt-4 text-center">
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-500 hover:underline">
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );
