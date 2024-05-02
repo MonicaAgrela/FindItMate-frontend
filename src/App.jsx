@@ -14,7 +14,6 @@ import EditItemsPage from "../pages/EditItemsPage";
 import MessagePage from "../pages/MessagePage";
 import AddItemsPage from "../pages/AddItemsPage";
 import Dashboard from "../components/Dashboard";
-import ProfilePage from "../pages/ProfilePage";
 
 function App() {
   return (
@@ -36,8 +35,15 @@ function App() {
         <Route exact path="/items/edit/:itemId" element={<EditItemsPage />} />
         <Route exact path="/how-it-works" element={<HowItWorks />} />
         <Route exact path="/items/messages/:itemId" element={<MessagePage />} />
-        <Route exact path="/dashboard" element={<Dashboard />} />
-        <Route exact path="/profile/dashboard" element={<ProfilePage />} />
+        <Route
+          exact
+          path="/dashboard"
+          element={
+            <IsPrivate>
+              <Dashboard />
+            </IsPrivate>
+          }
+        />
         <Route
           exact
           path="/signup"

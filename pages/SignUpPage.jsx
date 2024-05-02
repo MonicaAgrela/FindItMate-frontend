@@ -7,7 +7,6 @@ function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [username, setUserName] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
  
   const navigate = useNavigate();
@@ -16,7 +15,6 @@ function SignupPage(props) {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
-  const handleUserName = (e) => setUserName(e.target.value);
  
   
   const handleSignupSubmit = (e) => {
@@ -26,7 +24,6 @@ function SignupPage(props) {
         email:email,
         password:password,
         name:name,
-        username:username
     }
 
     axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`,newUser)
@@ -52,15 +49,6 @@ function SignupPage(props) {
           name="name"
           value={name}
           onChange={handleName}
-        />
-
-<label>Username:</label>
-        <input 
-          required
-          type="text"
-          name="name"
-          value={username}
-          onChange={handleUserName}
         />
  
       <form onSubmit={handleSignupSubmit}>

@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -8,6 +8,7 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   const authenticateUser = () => {
     //  <==  ADD
@@ -29,6 +30,7 @@ function AuthProviderWrapper(props) {
           setIsLoggedIn(true);
           setIsLoading(false);
           setUser(user);
+          navigate("/dashboard");
         })
         .catch((error) => {
           // If the server sends an error response (invalid token)
@@ -36,7 +38,7 @@ function AuthProviderWrapper(props) {
           setIsLoggedIn(false);
           setIsLoading(false);
           setUser(null);
-          console.log(error)
+          console.log(error);
         });
     } else {
       // If the token is not available (or is removed)

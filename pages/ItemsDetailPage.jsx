@@ -7,27 +7,16 @@ function ItemsDetailPage() {
   const [item, setItem] = useState(null);
   const { itemId } = useParams();
   const navigate = useNavigate();
-  /*const [message, setMessage] = useState("")
-
-  const requestBody = {message}
-
-  function  CreateMessage() {
-  message.createMessage(requestBody)
-  .then((res)=>{
-    console.log(res)
-    setMessage("")
-  })
-  .catch((err)=>{
-    console.log(err)
-  })
-}*/
 
   const getItem = () => {
     const token = localStorage.getItem("authToken");
     itemsService
-      .getItem(itemId)
+      .getAllItems() // Supondo que essa função busque todos os itens
       .then((response) => {
-        const oneItem = response.data;
+        const sortedItems = response.data.sort(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
+        const oneItem = sortedItems.find((item) => item._id === itemId); // Supondo que você tenha o itemId
         setItem(oneItem);
       })
       .catch((error) => console.log(error));

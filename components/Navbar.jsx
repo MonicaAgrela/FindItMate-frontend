@@ -22,6 +22,12 @@ function Navbar() {
           <Link to="/items">
             <button>Items</button>
           </Link>
+          <Link to="/dashboard">
+            <button>My Profile</button>
+          </Link>
+          <Link to="/new-item">
+            <button>Add New Item</button>
+          </Link>
 
           <button onClick={logOutUser}>Logout</button>
         </>

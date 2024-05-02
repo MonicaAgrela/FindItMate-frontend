@@ -22,7 +22,8 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h4>Name: {user.name}</h4>
+      <h4>Email: {user.email}</h4>
       <ul>
         {Array.isArray(items) &&
           items.map((item) => {
