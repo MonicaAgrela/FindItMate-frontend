@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-//import axios from "axios";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import itemsService from "../services/items.service";
 function ItemsPage() {
   const [items, setItems] = useState([]);
+  const [query, setQuery] = useState("");
 
   const getAllItems = () => {
     itemsService
@@ -17,6 +18,24 @@ function ItemsPage() {
   useEffect(() => {
     getAllItems();
   }, []);
+
+  useEffect(() => {
+    if (query.trim() === "") {
+      // If query is empty, fetch all items
+      getAllItems();
+    } else {
+      axios
+        .get(
+          `${import.meta.env.VITE_API_URL}/api/items/category?search=${query}`
+        )
+        .then((response) => {
+          setItems(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [query]);
 
   let category = [
     "keys",
@@ -44,10 +63,10 @@ function ItemsPage() {
         <input
           id="search-bar"
           type="text"
-          /*onChange={(e) => {
-              setQuery(e.target.value);
-            }}
-            value={query}*/
+          onChange={(e) => {
+            setQuery(e.target.value);
+          }}
+          value={query}
         />
       </label>
       {category.map((element) => {

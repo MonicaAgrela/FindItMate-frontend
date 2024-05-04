@@ -11,12 +11,9 @@ function ItemsDetailPage() {
   const getItem = () => {
     const token = localStorage.getItem("authToken");
     itemsService
-      .getAllItems() // Supondo que essa função busque todos os itens
+      .getItem(itemId)
       .then((response) => {
-        const sortedItems = response.data.sort(
-          (a, b) => new Date(a.date) - new Date(b.date)
-        );
-        const oneItem = sortedItems.find((item) => item._id === itemId); // Supondo que você tenha o itemId
+        const oneItem = response.data;
         setItem(oneItem);
       })
       .catch((error) => console.log(error));
