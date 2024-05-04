@@ -241,6 +241,7 @@ function CategoryItemsPage() {
       }
 
       <div className="bg-white p-4 rounded-md shadow-md">
+      <h2>Example</h2>
             <h2 className="text-lg font-semibold">
               {staticItems[category]["item"]}
             </h2>
