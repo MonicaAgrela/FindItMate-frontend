@@ -7,6 +7,7 @@ function MessagePage() {
   const [message, setMessage] = useState(null);
   const { itemId } = useParams();
   const [messageValue, setMessageValue] = useState("");
+  const loggedInUserId = "user123"; // Replace "user123" with the actual logged-in user ID
 
   const handleSubmit = (e) => {
     e?.preventDefault();
@@ -40,49 +41,72 @@ function MessagePage() {
     getAllMessages();
   }, [itemId]);
 
-  // const clearInput = () => {
-  //   messageRef.current.value = "";
-  // };
-  console.log(message);
+  // console.log(message);
   if (!message) {
     return (
-      <>
-        <input
-          type="text"
-          placeholder="Message"
-          onChange={(e) => {
-            setMessageValue(e.target.value);
-          }}
-        ></input>
-        <button type="button" onClick={() => handleSubmit()}>
-          Send
-        </button>
-      </>
+      <div className="flex flex-col h-screen bg-gray-100">
+        <div className="flex-grow overflow-auto">
+          <div className="h-full flex items-center justify-center">
+            <p>No messages yet</p>
+          </div>
+        </div>
+        <div className="fixed bottom-0 left-0 right-0 bg-white p-4 flex items-center">
+          <input
+            type="text"
+            placeholder="Message"
+            value={messageValue}
+            className="border-b-2 border-gray-300 flex-grow focus:outline-none px-4 py-2"
+            onChange={(e) => {
+              setMessageValue(e.target.value);
+            }}
+          ></input>
+          <button
+            type="button"
+            className="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600"
+            onClick={() => handleSubmit()}
+          >
+            Send
+          </button>
+        </div>
+      </div>
     );
   }
 
   return (
-    <div>
-      <h1>MessagePage</h1>
-      <form onSubmit={handleSubmit}>
-        {message.messages.map((oneMessage) => (
-          <div key={oneMessage._id}>
-            <p>{oneMessage.sender.name}</p>
-            <p>{oneMessage.message}</p>
-          </div>
-        ))}
+    <div className="flex flex-col h-screen bg-gray-100">
+      <div className="flex-grow overflow-auto">
+        <h1 className="text-lg font-bold mb-4">MessagePage</h1>
+        <div>
+          {message.messages.map((oneMessage) => (
+            <div key={oneMessage._id} className={`mb-4 ${oneMessage.sender.id === loggedInUserId ? 'ml-auto' : 'mr-auto'}`}>
+              <p className="text-sm font-semibold mb-1">
+                {oneMessage.sender.name}
+              </p>
+              <p className={`bg-white rounded-lg px-4 py-2 inline-block ${oneMessage.sender.id === loggedInUserId ? 'text-right' : 'text-left'}`}>
+                {oneMessage.message}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="fixed bottom-0 left-0 right-0 bg-white p-4 flex items-center">
         <input
           type="text"
           placeholder="Message"
           value={messageValue}
+          className="border-b-2 border-gray-300 flex-grow focus:outline-none px-4 py-2"
           onChange={(e) => {
             setMessageValue(e.target.value);
           }}
         ></input>
-        <button type="button" onClick={() => handleSubmit()}>
+        <button
+          type="button"
+          className="bg-blue-500 text-white px-4 py-2 hover:bg-blue-600"
+          onClick={() => handleSubmit()}
+        >
           Send
         </button>
-      </form>
+      </div>
     </div>
   );
 }

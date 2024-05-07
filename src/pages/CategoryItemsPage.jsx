@@ -239,27 +239,24 @@ function CategoryItemsPage() {
           ))}
         </div>
       }
-
       <div className="bg-white p-4 rounded-md shadow-md">
-      <h2>Example</h2>
-            <h2 className="text-lg font-semibold">
-              {staticItems[category]["item"]}
-            </h2>
-            <img
-              src={staticItems[category].image}
-              //alt={staticItems[category].image}
-              className="mt-2 mb-4 rounded-md object-cover w-full h-48"
-            />
-            <p>Description: {staticItems[category].description}</p>
-            <p>Place: {staticItems[category].place}</p>
-            <p>Location: {staticItems[category].location}</p>
-            <p>Date: {new Date(staticItems[category].date).toLocaleString()}</p>
-            <p>
-              Additional Information:{" "}
-              {staticItems[category].additionalInformation}
-            </p>
-          </div>
-
+        <h2>Example</h2>
+        <h2 className="text-lg font-semibold">
+          {staticItems[category]["item"]}
+        </h2>
+        <img
+          src={staticItems[category].image}
+          //alt={staticItems[category].image}
+          className="mt-2 mb-4 rounded-md object-cover w-full h-48"
+        />
+        <p>Description: {staticItems[category].description}</p>
+        <p>Place: {staticItems[category].place}</p>
+        <p>Location: {staticItems[category].location}</p>
+        <p>Date: {new Date(staticItems[category].date).toLocaleString()}</p>
+        <p>
+          Additional Information: {staticItems[category].additionalInformation}
+        </p>
+      </div>
       {items.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Display items */}
