@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-//import axios from "axios";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import itemsService from "../services/items.service";
 function ItemsPage() {
@@ -70,22 +70,22 @@ function ItemsPage() {
         />
       </label>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-         {category.map((element) => {
-        return (
-          <Link to={`/items/categories/${element}`} key={element}>
-            <div>{element}</div>
-          </Link>
-        );
-      })}
-      <div
-        style={{
-          display: `flex`,
-          justifyContent: "center",
-          padding: "10px",
-          fontSize: "20px",
-        }}
-      ></div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"></div>
+        {category.map((element) => {
+          return (
+            <Link to={`/items/categories/${element}`} key={element}>
+              <div>{element}</div>
+            </Link>
+          );
+        })}
+        <div
+          style={{
+            display: `flex`,
+            justifyContent: "center",
+            padding: "10px",
+            fontSize: "20px",
+          }}
+        ></div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"></div>
         {items && (
           <>
             {items.map((oneItem) => {

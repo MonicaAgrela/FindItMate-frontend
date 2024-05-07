@@ -19,24 +19,6 @@ function ItemsPage() {
     getAllItems();
   }, []);
 
-  useEffect(() => {
-    if (query.trim() === "") {
-      // If query is empty, fetch all items
-      getAllItems();
-    } else {
-      axios
-        .get(
-          `${import.meta.env.VITE_API_URL}/api/items/category?search=${query}`
-        )
-        .then((response) => {
-          setItems(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [query]);
-
   let category = [
     "keys",
     "wallet",
@@ -55,20 +37,39 @@ function ItemsPage() {
     "others",
   ];
 
+  useEffect(() => {
+    if (query.trim() === "") {
+      // If query is empty, fetch all items
+      getAllItems();
+    } else {
+      axios
+        .get(
+          `${import.meta.env.VITE_API_URL}/api/items/category?search=${query}`
+        )
+        .then((response) => {
+          setItems(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [query]);
+
   return (
-    <div>
-      {" "}
-      <label>
-        Search Items{" "}
+    <div className="bg-white max-w-screen-lg mx-auto p-4 rounded-lg shadow-md">
+      <label className="block text-center mb-4">
+        Search Items
         <input
           id="search-bar"
           type="text"
+          className="border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
           onChange={(e) => {
             setQuery(e.target.value);
           }}
           value={query}
         />
       </label>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
       {category.map((element) => {
         return (
           <Link to={`/items/categories/${element}`} key={element}>
