@@ -64,7 +64,6 @@ function ItemsDetailPage() {
             <p className="mb-4">{item.additionalInformation}</p>
           </>
         )}
-
         <div className="flex space-x-4 mb-4">
           <Link to="/items">
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

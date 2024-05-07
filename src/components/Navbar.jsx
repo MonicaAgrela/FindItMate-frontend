@@ -52,6 +52,9 @@ function Navbar() {
                 {isLoggedIn ? (
                   <>
                     <span className="text-white">{user.name}</span>
+                    <Link to="/dashboard">
+                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-md inline-block" >My Profile</button>
+                    </Link>
                     <button
                       onClick={logOutUser}
                       className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"

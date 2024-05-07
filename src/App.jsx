@@ -14,10 +14,6 @@ import EditItemsPage from "./pages/EditItemsPage";
 import MessagePage from "./pages/MessagePage";
 import Dashboard from "./components/Dashboard";
 
-
-
-
-
 function App() {
   return (
     <div className="bg-slate-900">
@@ -26,7 +22,17 @@ function App() {
       <Routes>
         <Route exact path="/" element={<HomePage />} />
 
-        <Route exact path="/items/:ItemId" element={<ItemDetailsPage />} />
+        <Route
+          exact
+          path="/items"
+          element={
+            <IsPrivate>
+              <ItemsPage />
+            </IsPrivate>
+          }
+        />
+
+        <Route exact path="/items/:itemId" element={<ItemDetailsPage />} />
 
         <Route exact path="/items/edit/:itemId" element={<EditItemsPage />} />
 
@@ -36,11 +42,17 @@ function App() {
           element={<CategoryItemsPage />}
         />
 
-        <Route exact path="/items" element={<ItemsPage />} />
-
         <Route exact path="/items/messages/:itemId" element={<MessagePage />} />
 
-        <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route
+          exact
+          path="/dashboard"
+          element={
+            <IsPrivate>
+              <Dashboard />
+            </IsPrivate>
+          }
+        />
 
         <Route
           exact
