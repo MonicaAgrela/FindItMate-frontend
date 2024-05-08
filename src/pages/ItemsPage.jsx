@@ -115,3 +115,86 @@ function ItemsPage() {
 }
 
 export default ItemsPage;
+
+
+/*import React from "react";
+import { act } from "react-dom/test-utils";
+import { fireEvent, render, screen, cleanup, waitForElementToBeRemoved } from "@testing-library/react";
+import axios from 'axios';
+
+import App from "../src/App";
+import BreweryList from "../src/components/BreweryList";
+const API_BASE_URL = "https://api.openbrewerydb.org";
+
+jest.mock('axios');
+const mockedAxios = axios;
+
+afterEach(cleanup);
+describe("Task 1: Get the data from the API", () => {
+  describe('BreweryList', ()=> {
+  
+    beforeEach(() => {
+      jest.resetAllMocks();    
+    });
+    
+    test('should make an `axios` GET request to the BreweryAPI', async () => {
+      
+      const mockData = [
+        { name: 'Brewery 1', id: 1 },
+        { name: 'Brewery 2', id: 2 },
+        { name: 'Brewery 3', id: 3 }
+      ];
+      axios.get.mockResolvedValueOnce({ data: mockData });
+      render(<BreweryList />);
+      
+      expect(axios.get).toHaveBeenCalled();
+      expect(axios.get).toHaveBeenCalledWith(API_BASE_URL + "/breweries");
+      
+      await waitForElementToBeRemoved(() => screen.getByText(/No breweries to show/i))
+    });
+    
+  });
+});
+
+describe("Task 2: Render the list of breweries", () => {
+  describe('BreweryList', ()=> {
+    
+    beforeEach(() => jest.resetAllMocks());
+
+    test('should render a list containing `<article> </article>` for each brewery', async () => {
+      const mockData = [
+        { name: 'Brewery 1', id: 1 },
+        { name: 'Brewery 2', id: 2 },
+        { name: 'Brewery 3', id: 3 }
+      ];
+      
+      axios.get.mockResolvedValueOnce({ data: mockData });
+      render(<BreweryList />);
+      await waitForElementToBeRemoved(() => screen.getByText(/No breweries to show/i));      
+      
+      const articles = screen.queryAllByRole('article');
+      expect(articles).toHaveLength(mockData.length);
+    });
+
+    
+    test('should render a list containing each brewery name \nExample:\n\n<article>\n\n  <p> {/* BREWERY NAME * </p>\n\n</article>', async () => {
+      const mockData = [
+        { name: 'Brewery 1', id: 1 },
+        { name: 'Brewery 2', id: 2 },
+        { name: 'Brewery 3', id: 3 }
+      ];
+      axios.get.mockResolvedValueOnce({ data: mockData });
+      render(<BreweryList />);
+      await waitForElementToBeRemoved(() => screen.getByText(/No breweries to show/i));       
+      
+      const articles = screen.queryAllByRole('article');
+      expect(articles).toHaveLength(mockData.length); 
+      
+      mockData.forEach((brewery) => {
+        expect(screen.queryByText(brewery.name)).toBeTruthy();
+      })
+       
+    });
+
+  });  
+});*/

@@ -36,12 +36,7 @@ function Navbar() {
                 >
                   How It Works
                 </Link>
-                <Link
-                  to="/login"
-                  className="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Login
-                </Link>
+                
                 {isLoggedIn && ( // Only render if user is logged in
                   <Link
                     to="/items"
@@ -78,12 +73,12 @@ function Navbar() {
                     >
                       Sign Up
                     </Link>
-                    {/* <Link
+                     <Link
                       to="/login"
                       className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Login
-                    </Link> */}
+                    </Link> 
                   </>
                 )}
               </div>
@@ -146,12 +141,12 @@ function Navbar() {
                 >
                   Sign Up
                 </Link>
-                {/* <Link
+                <Link
                   to="/login"
                   className="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Login
-                </Link> */}
+                </Link> 
               </>
             )}
           </div>
