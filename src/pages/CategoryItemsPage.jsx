@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 
 function CategoryItemsPage() {
   const [items, setItems] = useState([]);
-
   const { category } = useParams();
 
   let staticItems = {
@@ -167,9 +166,7 @@ function CategoryItemsPage() {
           `${import.meta.env.VITE_API_URL}/api/items/category?type=${category}`
         )
         .then((response) => {
-          console.log(response.data);
-          let sortedResponse = response.data;
-          setItems(sortedResponse);
+          setItems(response.data);
         })
         .catch((error) => {
           console.error(error);
@@ -178,98 +175,65 @@ function CategoryItemsPage() {
   }, [category]);
 
   return (
-    <div
-      className="flex flex-col items-center space-y-4 mt-30"
-      style={{ backgroundColor: "#FAFAF9", paddingTop: "100px" }}
-    >
-      {
-        <div className="flex space-x-4">
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col items-center space-y-4">
+        <div className="flex flex-wrap justify-center space-x-4">
           {/* Category buttons */}
-          {[
-            {
-              type: "keys",
-            },
-            {
-              type: "wallet",
-            },
-            {
-              type: "phone",
-            },
-            {
-              type: "headphones",
-            },
-            {
-              type: "shoes",
-            },
-            {
-              type: "remote",
-            },
-            {
-              type: "purse",
-            },
-            {
-              type: "glasses",
-            },
-            {
-              type: "umbrella",
-            },
-            {
-              type: "camera",
-            },
-            {
-              type: "bicycle",
-            },
-            {
-              type: "laptop",
-            },
-            {
-              type: "documents",
-            },
-            {
-              type: "vehicles",
-            },
-            {
-              type: "others",
-            },
-          ].map((category) => (
-            <Link key={category.type} to={`/items/categories/${category.type}`}>
-              {category.icon}
-              <span>{category.type}</span>
+          {Object.keys(staticItems).map((key) => (
+            <Link key={key} to={`/items/categories/${key}`}>
+              <div className="flex flex-col items-center justify-center bg-gray-100 rounded-lg p-2 hover:bg-gray-200 transition duration-300">
+                <img
+                  src={staticItems[key].image}
+                  alt={staticItems[key].item}
+                  className="w-10 h-10 mb-2 rounded-full object-cover"
+                />
+                <span className="text-xs">{staticItems[key].item}</span>
+              </div>
             </Link>
           ))}
         </div>
-      }
-      <div className="bg-white p-4 rounded-md shadow-md">
-        <h2>Example</h2>
-        <h2 className="text-lg font-semibold">
-          {staticItems[category]["item"]}
-        </h2>
-        <img
-          src={staticItems[category].image}
-          //alt={staticItems[category].image}
-          className="mt-2 mb-4 rounded-md object-cover w-full h-48"
-        />
-        <p>Description: {staticItems[category].description}</p>
-        <p>Place: {staticItems[category].place}</p>
-        <p>Location: {staticItems[category].location}</p>
-        <p>Date: {new Date(staticItems[category].date).toLocaleString()}</p>
-        <p>
-          Additional Information: {staticItems[category].additionalInformation}
-        </p>
-      </div>
-      {items.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Display items */}
-          {items.map((item) => {
-            return (
+
+        <div className="bg-white p-4 rounded-md shadow-md w-full flex justify-center items-center">
+          {category && (
+            <div className="max-w-md">
+              <h2 className="text-lg font-semibold text-center mb-2">
+                {staticItems[category].item}
+              </h2>
+              <img
+                src={staticItems[category].image}
+                alt={staticItems[category].item}
+                className="mt-2 rounded-md object-cover w-full h-auto" // Adjusted image size
+              />
+              <p className="mt-2 text-center">
+                Description: {staticItems[category].description}
+              </p>
+              <p className="text-center">
+                Place: {staticItems[category].place}
+              </p>
+              <p className="text-center">
+                Location: {staticItems[category].location}
+              </p>
+              <p className="text-center">
+                Date: {new Date(staticItems[category].date).toLocaleString()}
+              </p>
+              <p className="text-center">
+                Additional Information:{" "}
+                {staticItems[category].additionalInformation}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+          {items.length > 0 ? (
+            items.map((item) => (
               <div key={item._id} className="bg-white p-4 rounded-md shadow-md">
                 <h2 className="text-lg font-semibold">{item.item}</h2>
                 <img
                   src={item.image}
-                  alt={CategoryItemsPage.name}
+                  alt={item.item}
                   className="mt-2 mb-4 rounded-md object-cover w-full h-48"
                 />
-
                 <Link
                   to={`/items/${item._id}`}
                   className="text-blue-500 hover:underline"
@@ -277,14 +241,14 @@ function CategoryItemsPage() {
                   See Item
                 </Link>
               </div>
-            );
-          })}
+            ))
+          ) : (
+            <p className="text-gray-500 mt-4">
+              No items found for the selected category.
+            </p>
+          )}
         </div>
-      ) : (
-        <p className="text-gray-500 mt-4">
-          No items found for the selected category.
-        </p>
-      )}
+      </div>
     </div>
   );
 }

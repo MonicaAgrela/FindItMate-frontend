@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -13,13 +14,19 @@ const HeroSection = () => {
             Welcome to FindItMate site where you may find lost and locate lost
             product mostly in no time! – or whose owner you lost.
           </p>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Sign up now, it's free
-          </button>
+          <Link to="/signup">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Sign up now, it's free
+            </button>
+          </Link>
         </div>
         <div className="md:w-1/2">
           {/* Place your illustration here */}
-          <img src="/hero2.png" alt="" />
+          <img
+            className="w-2/4 h-auto flex justify-center"
+            src="/5188355.jpg"
+            alt=""
+          />
         </div>
       </div>
     </div>
