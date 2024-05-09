@@ -71,8 +71,8 @@ function EditItemsPage(props) {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-white">
-      <div className="p-8 bg-white rounded-lg shadow-md sm:w-3/4 md:w-3/4 lg:w-2/3 xl:w-1/2">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+      <div className="p-8 bg-white rounded-lg shadow-md sm:w-3/4 md:w-3/4 lg:w-2/3 xl:w-1/2 mt-8">
         <h3 className="text-2xl font-bold mb-4">Edit the Item</h3>
 
         <form onSubmit={handleFormSubmit} className="space-y-4">

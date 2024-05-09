@@ -1,5 +1,5 @@
 import { useState } from "react";
-//import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import itemsService from "../services/items.service";
 
@@ -11,6 +11,8 @@ function AddItemsPage() {
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [additionalInformation, setAdditionalInformation] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ function AddItemsPage() {
       .createItem(requestBody)
       .then((response) => {
         console.log(response);
+        navigate("/dashboard");
         // Reset the state
         setType("");
         setImage("");
@@ -67,8 +70,8 @@ function AddItemsPage() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-white">
-      <div className="p-8 bg-white rounded-lg shadow-md sm:w-3/4 md:w-3/4 lg:w-2/3 xl:w-1/2">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+      <div className="p-8 bg-white rounded-lg shadow-md sm:w-3/4 md:w-3/4 lg:w-2/3 xl:w-1/2 mt-8">
         <h1 className="text-2xl font-bold mb-4">AddItemsPage</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">

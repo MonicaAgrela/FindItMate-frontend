@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function HowItWorks() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -24,9 +26,14 @@ function HowItWorks() {
           again!
         </p>
         <div className="flex justify-center">
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">
-            Sign Up
-          </button>
+          <Link to="/signup" className="block text-sm">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300"
+            >
+              Sign Up
+            </button>
+          </Link>
         </div>
       </div>
     </div>

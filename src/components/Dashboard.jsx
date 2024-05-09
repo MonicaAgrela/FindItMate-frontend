@@ -22,8 +22,8 @@ const Dashboard = () => {
 
   return (
     <div className="max-w-lg mx-auto px-4 bg-white">
-      <h4 className="text-2xl font-bold mb-4">Name: {user.name}</h4>
-      <h4 className="text-2xl font-bold mb-4">Email: {user.email}</h4>
+      <h4 className="text-xl font-bold mb-4">Name: {user.name}</h4>
+      <h4 className="text-xl font-bold mb-4">Email: {user.email}</h4>
       <ul>
         {Array.isArray(items) &&
           items.map((item) => {
