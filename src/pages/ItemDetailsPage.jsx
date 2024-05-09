@@ -52,11 +52,14 @@ function ItemsDetailPage() {
         {item && (
           <>
             <h1 className="text-2xl font-bold mb-4">{item.type}</h1>
-            <img
-              src={`${item.image}`}
-              alt="image"
-              className="mb-4 rounded-lg"
-            ></img>
+            <div className="max-w-full overflow-hidden rounded-lg">
+              <img
+                src={`${item.image}`}
+                alt="image"
+                className="mb-4 w-full"
+                style={{ maxWidth: "100%" }}
+              ></img>
+            </div>
             <p className="mb-2">{item.description}</p>
             <p className="mb-2">{item.place}</p>
             <p className="mb-2">{item.location}</p>
