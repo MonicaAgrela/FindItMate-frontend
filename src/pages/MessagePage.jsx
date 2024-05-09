@@ -1,12 +1,14 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import messageService from "../services/message.service";
+import { AuthContext } from "../context/auth.context";
 
 function MessagePage() {
   /*const messageRef = useRef();*/
   const [message, setMessage] = useState(null);
   const { itemId } = useParams();
   const [messageValue, setMessageValue] = useState("");
+  const { user } = useContext(AuthContext);
   const loggedInUserId = "user123"; // Replace "user123" with the actual logged-in user ID
 
   const handleSubmit = (e) => {
@@ -78,13 +80,26 @@ function MessagePage() {
         <h1 className="text-lg font-bold mb-4">MessagePage</h1>
         <div>
           {message.messages.map((oneMessage) => (
-            <div key={oneMessage._id} className={`mb-4 ${oneMessage.sender.id === loggedInUserId ? 'ml-auto' : 'mr-auto'}`}>
+            <div
+              key={oneMessage._id}
+              className={`mb-4 flex ${
+                oneMessage.sender._id === user?._id ? "justify-end" : "justify-start"
+              }`}
+            >
+            <div className="flex flex-col">
               <p className="text-sm font-semibold mb-1">
                 {oneMessage.sender.name}
               </p>
-              <p className={`bg-white rounded-lg px-4 py-2 inline-block ${oneMessage.sender.id === loggedInUserId ? 'text-right' : 'text-left'}`}>
+              <p
+                className={`bg-white rounded-lg px-4 py-2 inline-block ${
+                  oneMessage.sender._id === user?._id
+                    ? "text-right  bg-green-400 self-end"
+                    : "text-left bg-slate-200"
+                }`}
+              >
                 {oneMessage.message}
               </p>
+              </div>
             </div>
           ))}
         </div>

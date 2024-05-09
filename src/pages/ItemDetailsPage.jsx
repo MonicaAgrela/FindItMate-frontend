@@ -34,53 +34,50 @@ function ItemsDetailPage() {
 
   return (
     <div className="flex justify-center items-center h-screen bg-white">
-    <div className="p-8 bg-white rounded-lg shadow-md sm:w-3/4 md:w-3/4 lg:w-2/3 xl:w-1/2">
-      {item && (
-        <>
-          <h1 className="text-2xl font-bold mb-4">{item.type}</h1>
-          <div className="max-w-full overflow-hidden rounded-lg">
+      <div className="p-8 bg-white rounded-lg shadow-md sm:w-3/4 md:w-3/4 lg:w-2/3 xl:w-1/2">
+        {item && (
+          <>
+            <h1 className="text-2xl font-bold mb-4">{item.type}</h1>
             <img
               src={`${item.image}`}
               alt="image"
-              className="mb-4 w-full"
-              style={{ maxWidth: "100%" }}
+              className="mb-4 rounded-lg max-w-full max-h-72" // Added max-w-full and h-auto classes
             ></img>
-          </div>
-          <p className="mb-2">{item.description}</p>
-          <p className="mb-2">{item.place}</p>
-          <p className="mb-2">{item.location}</p>
-          <p className="mb-2">{item.date}</p>
-          <p className="mb-4">{item.additionalInformation}</p>
-        </>
-      )}
-      <div className="flex space-x-4 mb-4">
-        <Link to="/items">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Back to Items
+            <p className="mb-2">{item.description}</p>
+            <p className="mb-2">{item.place}</p>
+            <p className="mb-2">{item.location}</p>
+            <p className="mb-2">{item.date}</p>
+            <p className="mb-4">{item.additionalInformation}</p>
+          </>
+        )}
+        <div className="flex space-x-4 mb-4">
+          <Link to="/items">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Back to Items
+            </button>
+          </Link>
+
+          <Link to={`/items/edit/${itemId}`}>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Edit Item
+            </button>
+          </Link>
+
+          <Link to={`/items/messages/${itemId}`}>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Chat
+            </button>
+          </Link>
+
+          <button
+            onClick={deleteItem}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Delete Item
           </button>
-        </Link>
-  
-        <Link to={`/items/edit/${itemId}`}>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Edit Item
-          </button>
-        </Link>
-  
-        <Link to={`/items/messages/${itemId}`}>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Chat
-          </button>
-        </Link>
-  
-        <button
-          onClick={deleteItem}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Delete Item
-        </button>
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 
