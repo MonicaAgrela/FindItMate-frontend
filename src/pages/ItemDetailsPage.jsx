@@ -7,20 +7,6 @@ function ItemsDetailPage() {
   const [item, setItem] = useState(null);
   const { itemId } = useParams();
   const navigate = useNavigate();
-  /*const [message, setMessage] = useState("")
-
-  const requestBody = {message}
-
-  function  CreateMessage() {
-  message.createMessage(requestBody)
-  .then((res)=>{
-    console.log(res)
-    setMessage("")
-  })
-  .catch((err)=>{
-    console.log(err)
-  })
-}*/
 
   const getItem = () => {
     const token = localStorage.getItem("authToken");
@@ -52,12 +38,12 @@ function ItemsDetailPage() {
         {item && (
           <>
             <h1 className="text-2xl font-bold mb-4">{item.type}</h1>
-            <div className="max-w-full overflow-hidden rounded-lg">
+            <div className="max-w-full max-h-screen overflow-hidden rounded-lg">
               <img
                 src={`${item.image}`}
                 alt="image"
                 className="mb-4 w-full"
-                style={{ maxWidth: "100%" }}
+                style={{ maxWidth: "100%", maxHeight: "100%" }}
               ></img>
             </div>
             <p className="mb-2">{item.description}</p>
