@@ -36,7 +36,7 @@ function Navbar() {
                 >
                   How It Works
                 </Link>
-                
+
                 {isLoggedIn && ( // Only render if user is logged in
                   <Link
                     to="/items"
@@ -47,7 +47,7 @@ function Navbar() {
                 )}
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-md inline-block">
                   <Link to="/Submit-found-item" className="block text-sm">
-                    Submit Found Item
+                    Submit Item
                   </Link>
                 </button>
                 {isLoggedIn ? (
@@ -73,12 +73,12 @@ function Navbar() {
                     >
                       Sign Up
                     </Link>
-                     <Link
+                    <Link
                       to="/login"
                       className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Login
-                    </Link> 
+                    </Link>
                   </>
                 )}
               </div>
@@ -113,6 +113,7 @@ function Navbar() {
             >
               How it works
             </Link>
+
             {isLoggedIn && ( // Only render if user is logged in
               <Link
                 to="/items"
@@ -121,11 +122,18 @@ function Navbar() {
                 Items
               </Link>
             )}
+            <Link to="/dashboard">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-md inline-block">
+                My Profile
+              </button>
+            </Link>
+            <br></br>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-md inline-block">
               <Link to="/Submit-found-item" className="block text-sm">
-                Submit Found Item
+                Submit Item
               </Link>
             </button>
+
             {isLoggedIn ? (
               <button
                 onClick={logOutUser}
@@ -146,7 +154,7 @@ function Navbar() {
                   className="text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Login
-                </Link> 
+                </Link>
               </>
             )}
           </div>
